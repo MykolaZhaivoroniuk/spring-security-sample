@@ -1,0 +1,51 @@
+# Issue
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:8-jdk-alpine
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages
+RUN apk add --no-cache bash
+
+USER root
+
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
+
+# Define environment variable
+ENV JAVA_OPTS=""
+
+# Run the application when the container starts
+CMD ["bash", "-c", "java $JAVA_OPTS -jar myapp.jar"]
+
+
+
+
+
+#Remediation
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:8-jdk-alpine
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages
+RUN apk add --no-cache bash
+
+USER myapp
+
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
+
+# Define environment variable
+ENV JAVA_OPTS=""
+
+# Run the application when the container starts
+CMD ["bash", "-c", "java $JAVA_OPTS -jar myapp.jar"]
